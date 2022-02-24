@@ -1,11 +1,6 @@
+import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
-
-interface IUser {
-  id: number,
-  username: string,
-  password: string,
-  email: string,
-}
+import { IUserWithoutId, IUser } from '../interfaces/userInterface';
 
 const getAll = async (): Promise<IUser[]> => {
   const [rows] = await connection.execute('SELECT * FROM Trybesmith.Users');
@@ -18,7 +13,25 @@ const getById = async (id: number) => {
   return user;
 };
 
+const createUser = async (user: IUserWithoutId) => { 
+  const { username, classe, level, password } = user;
+  const query = `
+    INSERT INTO Trybesmith.Users (username, classe, level, password) 
+    VALUES (?, ?, ?, ?)`;
+  const [{ insertId: id }] = await connection.execute<ResultSetHeader>(
+    query,
+    [username, classe, level, password],
+  );
+
+  return { id, username, classe, level, password };
+};
+
+const updateUser = async () => {
+  
+};
+
 export default {
   getAll,
   getById,
+  createUser,
 };
