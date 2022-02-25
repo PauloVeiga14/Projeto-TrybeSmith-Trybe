@@ -11,6 +11,7 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/login', UserController.login);
 app.post(
   '/users',
   validateUsername,

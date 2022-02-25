@@ -8,9 +8,10 @@ enum ErrorMessages {
   PasswordIsntString = 'Password must be a string',
   levelIsntNumber = 'Level must be a number',
   invalidUsername = 'Username must be longer than 2 characters',
-  invalidClasse = 'classe must be longer than 2 characters',
+  invalidClasse = 'Classe must be longer than 2 characters',
   invalidPassword = 'Password must be longer than 7 characters',
   invalidLevel = 'Level must be greater than 0',
+  invalidLogin = 'Username or password invalid',
 }
 
 export default ErrorMessages;
