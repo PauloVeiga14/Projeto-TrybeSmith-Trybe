@@ -24,6 +24,7 @@ app.post(
   validatePassword,
   UserController.createUser,
 );
+app.get('/products', validateJWT, ProductController.getAll);
 app.post('/products', validateJWT, validateName, validateAmount, ProductController.createProduct);
 
 export default app;

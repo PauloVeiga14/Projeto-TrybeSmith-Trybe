@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import ProductModel from '../models/ProductModel';
 import StatusCode from '../enums/StatusCode';
 
+const getAll = async (_req: Request, res: Response) => {
+  const products = await ProductModel.getAll();
+  return res.status(StatusCode.OK).json(products);
+};
+
 const createProduct = async (req: Request, res: Response) => {
   const product = req.body;
 
@@ -15,5 +20,6 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 export default {
+  getAll,
   createProduct,
 };
