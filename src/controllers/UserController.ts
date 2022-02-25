@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import UserModel from '../models/UserModel';
+import StatusCode from '../enums/StatusCode';
 
 // import { IUserWithoutId } from '../interfaces/userInterface';
 
@@ -30,7 +31,7 @@ const createUser = async (req: Request, res: Response) => {
   
   const token = jwt.sign(newUser, secret, jwtConfig);
   
-  return res.status(201).json({ token }); 
+  return res.status(StatusCode.Created).json({ token }); 
 };
 
 // const updateUser = async (req: Request, _res: Response) => {
