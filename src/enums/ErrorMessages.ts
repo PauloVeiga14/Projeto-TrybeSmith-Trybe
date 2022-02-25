@@ -3,7 +3,7 @@ enum ErrorMessages {
   noClasseKey = 'Classe is required',
   noLevelKey = 'Level is required',
   noPasswordKey = 'Password is required',
-  userNameIsntString = 'Username must be a string',
+  usernameIsntString = 'Username must be a string',
   classeIsntString = 'Classe must be a string',
   PasswordIsntString = 'Password must be a string',
   levelIsntNumber = 'Level must be a number',
