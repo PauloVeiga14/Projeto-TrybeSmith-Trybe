@@ -5,13 +5,14 @@ import {
   validateLevel, 
   validatePassword,
 } from './middlewares/validateUser';
+import validateLogin from './middlewares/validateLogin';
 import UserController from './controllers/UserController';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/login', UserController.login);
+app.post('/login', validateLogin, UserController.login);
 app.post(
   '/users',
   validateUsername,
