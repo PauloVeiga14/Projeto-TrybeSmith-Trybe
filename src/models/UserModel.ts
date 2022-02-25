@@ -26,12 +26,22 @@ const createUser = async (user: IUserWithoutId) => {
   return { id, username, classe, level, password };
 };
 
-const updateUser = async () => {
-  
+const updateUser = async (id: number, user: IUserWithoutId): Promise<IUser> => {
+  const { username, classe, level, password } = user;
+  const query = 'UPDATE Trybesmith.Users SET username=?, classe=?, level=?, password=? WHERE id=?';
+  await connection.execute(query, [username, classe, level, password, id]);
+
+  return { id, username, classe, level, password };
+};
+
+const deleteUser = async (id: number): Promise<void> => {
+  await connection.execute('DELETE FROM TrybeSmith.Users WHERE id=?', [id]);
 };
 
 export default {
   getAll,
   getById,
   createUser,
+  updateUser,
+  deleteUser,
 };
