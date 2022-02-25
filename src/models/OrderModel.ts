@@ -1,11 +1,11 @@
 import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
 
-const createOrder = async (userId: number) => {
+const createOrder = async (userId: number, products: []) => {
   const query = 'INSERT INTO Trybesmith.Orders (userId) VALUES (?)';
-  const [{ insertId: id }] = await connection.execute<ResultSetHeader>(query, [userId]);
+  await connection.execute<ResultSetHeader>(query, [userId]);
 
-  return { id, userId };
+  return { userId, products };
 }; 
 
 export default {

@@ -10,6 +10,8 @@ import UserController from './controllers/UserController';
 import validateJWT from './auth/validateJWT';
 import ProductController from './controllers/ProductController';
 import { validateName, validateAmount } from './middlewares/validateProduct';
+import OrderController from './controllers/OrderController';
+import validateOrder from './middlewares/validateOrder';
 
 const app = express();
 
@@ -26,5 +28,7 @@ app.post(
 );
 app.get('/products', validateJWT, ProductController.getAll);
 app.post('/products', validateJWT, validateName, validateAmount, ProductController.createProduct);
+
+app.post('/orders', validateJWT, validateOrder, OrderController.createOrder);
 
 export default app;

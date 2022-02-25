@@ -10,7 +10,7 @@ const validateJWT = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
 
     if (token === undefined) {
-      return res.status(401).json({ error: ErrorMessages.noToken });
+      return res.status(StatusCode.Unauthorized).json({ error: ErrorMessages.noToken });
     }
 
     jwt.verify(token, secret);

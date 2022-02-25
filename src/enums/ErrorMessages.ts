@@ -6,12 +6,14 @@ enum ErrorMessages {
   noToken = 'Token not found',
   noNameKey = 'Name is required',
   noAmountKey = 'Amount is required',
+  noProductsKey = 'Products is required',
   usernameIsntString = 'Username must be a string',
   classeIsntString = 'Classe must be a string',
   PasswordIsntString = 'Password must be a string',
   levelIsntNumber = 'Level must be a number',
   nameIsntString = 'Name must be a string',
   amountIsntString = 'Amount must be a string',
+  productsIsntArray = 'Products must be an array of numbers',
   invalidUsername = 'Username must be longer than 2 characters',
   invalidName = 'Name must be longer than 2 characters',
   invalidClasse = 'Classe must be longer than 2 characters',
@@ -20,6 +22,7 @@ enum ErrorMessages {
   invalidLogin = 'Username or password invalid',
   invalidToken = 'Invalid token',
   invalidAmount = 'Amount must be longer than 2 characters',
+  invalidProducts = 'Products can\'t be empty',
 }
 
 export default ErrorMessages;
