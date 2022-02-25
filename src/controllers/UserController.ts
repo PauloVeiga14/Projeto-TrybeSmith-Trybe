@@ -1,45 +1,58 @@
+import jwt from 'jsonwebtoken';
+import { Request, Response } from 'express';
 import UserModel from '../models/UserModel';
-import { IUserWithoutId } from '../interfaces/userInterface';
 
-const getAll = async (_req: Request, _res: Response) => {
-  const users = await UserModel.getAll();
-  console.log(users); 
-};
+// import { IUserWithoutId } from '../interfaces/userInterface';
 
-const getById = async (req: Request, _res: Response) => {
-  const { id } = req.params;
+const secret = 'minhasenhasecreta';
 
-  const user = await UserModel.getById(id);
-  console.log(user); 
-};
+// const getAll = async (_req: Request, _res: Response) => {
+//   const users = await UserModel.getAll();
+//   console.log(users); 
+// };
 
-const createUser = async (req: Request, _res: Response) => {
-  const user: IUserWithoutId = req.body;
+// const getById = async (req: Request, _res: Response) => {
+//   const { id } = req.params;
+
+//   const user = await UserModel.getById(id);
+//   console.log(user); 
+// };
+
+const createUser = async (req: Request, res: Response) => {
+  const user = req.body;
 
   const newUser = await UserModel.createUser(user);
-  console.log(newUser); 
+
+  const jwtConfig: jwt.SignOptions = {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  };
+  
+  const token = jwt.sign(newUser, secret, jwtConfig);
+  
+  return res.status(201).json({ token }); 
 };
 
-const updateUser = async (req: Request, _res: Response) => {
-  const { id } = req.params;
-  const user: IUserWithoutId = req.body;
+// const updateUser = async (req: Request, _res: Response) => {
+//   const { id } = req.params;
+//   const user: IUserWithoutId = req.body;
 
-  const updated = await UserModel.updateUser(id, user);
+//   const updated = await UserModel.updateUser(id, user);
 
-  console.log(updated);
-};
+//   console.log(updated);
+// };
 
-const deleteUser = async (req: Request, _res: Response) => {
-  const { id } = req.params;
-  const deleted = await UserModel.deleteUser(id);
+// const deleteUser = async (req: Request, _res: Response) => {
+//   const { id } = req.params;
+//   const deleted = await UserModel.deleteUser(id);
 
-  console.log(deleted);
-};
+//   console.log(deleted);
+// };
 
 export default {
-  getAll,
-  getById,
+  // getAll,
+  // getById,
   createUser,
-  updateUser,
-  deleteUser,
+  // updateUser,
+  // deleteUser,
 };
