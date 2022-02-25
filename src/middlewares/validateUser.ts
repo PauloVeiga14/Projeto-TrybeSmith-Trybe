@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 const validateUsername = (req: Request, res: Response, next: NextFunction) => {
   const { username } = req.body;
 
-  if (!username) {
+  if (username === undefined) {
     return res.status(400).json({ error: 'Username is required' });
   }
 
@@ -21,8 +21,8 @@ const validateUsername = (req: Request, res: Response, next: NextFunction) => {
 const validateClasse = (req: Request, res: Response, next: NextFunction) => {
   const { classe } = req.body;
 
-  if (!classe) {
-    return res.status(400).json({ error: 'classe is required' });
+  if (classe === undefined) {
+    return res.status(400).json({ error: 'Classe is required' });
   }
 
   if (typeof classe !== 'string') {
@@ -39,7 +39,7 @@ const validateClasse = (req: Request, res: Response, next: NextFunction) => {
 const validateLevel = (req: Request, res: Response, next: NextFunction) => {
   const { level } = req.body;
 
-  if (!level) {
+  if (level === undefined) {
     return res.status(400).json({ error: 'Level is required' });
   }
 
@@ -48,7 +48,7 @@ const validateLevel = (req: Request, res: Response, next: NextFunction) => {
   }
 
   if (level <= 0) {
-    return res.status(422).json({ error: 'Level must be greaer than 0' });
+    return res.status(422).json({ error: 'Level must be greater than 0' });
   }
 
   next();
@@ -57,7 +57,7 @@ const validateLevel = (req: Request, res: Response, next: NextFunction) => {
 const validatePassword = (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
 
-  if (!password) {
+  if (password === undefined) {
     return res.status(400).json({ error: 'Password is required' });
   }
 

@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.post(
-  '/user',
+  '/users',
   validateUsername,
   validateClasse,
   validateLevel,
