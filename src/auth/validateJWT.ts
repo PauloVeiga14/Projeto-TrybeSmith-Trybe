@@ -1,22 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import ErrorMessages from '../enums/ErrorMessages';
+import StatusCode from '../enums/StatusCode';
 
 const secret = 'minhasenhasecreta';
 
 const validateJWT = async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization;
+  try {
+    const token = req.headers.authorization;
 
-  if (!token) {
-    return res.status(401).json({ message: 'Token not found' });
+    if (token === undefined) {
+      return res.status(401).json({ error: ErrorMessages.noToken });
+    }
+
+    jwt.verify(token, secret);
+
+    next();
+  } catch (error) {
+    return res.status(StatusCode.Unauthorized).json({ error: ErrorMessages.invalidToken });
   }
-  
-  const decoded = jwt.verify(token, secret);
-
-  console.log(decoded);
-
-  next();
 };
 
-export default {
-  validateJWT,
-};
+export default validateJWT;

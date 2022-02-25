@@ -7,6 +7,9 @@ import {
 } from './middlewares/validateUser';
 import validateLogin from './middlewares/validateLogin';
 import UserController from './controllers/UserController';
+import validateJWT from './auth/validateJWT';
+import ProductController from './controllers/ProductController';
+import { validateName, validateAmount } from './middlewares/validateProduct';
 
 const app = express();
 
@@ -21,5 +24,6 @@ app.post(
   validatePassword,
   UserController.createUser,
 );
+app.post('/products', validateJWT, validateName, validateAmount, ProductController.createProduct);
 
 export default app;
